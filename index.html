@@ -12,24 +12,29 @@
     <title>Academlo Store</title>
 </head>
 <body>
+    <div class="loader" id="loader">
+        <svg class="loader__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.92 56.48"><title>Academlo Logo</title><g><g><path d="M24.45,56.48,0,42.36V14.12L24.46,0,48.92,14.12V42.36ZM1.89,41.26l22.56,13L47,41.26v-26l-22.56-13-22.56,13Z"></path><path d="M28.58,15.39H25.16L35.78,36H31.49L20.67,15.71,8.23,38.82H18.94l3-5.43h-3.4l-1.47,2.54h-4l2.69-5.09H25.85l4.28,8H40.67ZM17.23,28.21l3.57-6.6,3.57,6.6Z"></path></g></g></svg>
+    </div>
     <header class="header">
         <nav class="header__nav nav">
-            <a class="nav__a" href="">
+            <a class="nav__a nav__a--logo" href="">
                     <svg  class="nav__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.92 56.48" ><title>Academlo Logo</title><g><g><!-- <path d="M24.45,56.48,0,42.36V14.12L24.46,0,48.92,14.12V42.36ZM1.89,41.26l22.56,13L47,41.26v-26l-22.56-13-22.56,13Z"></path> --><path d="M28.58,15.39H25.16L35.78,36H31.49L20.67,15.71,8.23,38.82H18.94l3-5.43h-3.4l-1.47,2.54h-4l2.69-5.09H25.85l4.28,8H40.67ZM17.23,28.21l3.57-6.6,3.57,6.6Z"></path></g></g></svg>
                     <span class="nav__span--logo">store</span>
             </a>
+            <a class="nav__a nav__a--home" href="">Home</a>
+            <a class="nav__a nav__a--products" href="">Products</a>
             <div class="nav__div">
                 <button class="nav__btn">
-                    <img class="nav__img" src="./assets/images/moon.png" alt="" loading="lazy">
+                    <svg class="nav__svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"></path></svg>
                 </button>
                 <button class="nav__btn">
                     <div class="nav__div--sub">
-                        <img class="nav__img" src="./assets/images/shopping-bag.png" alt="" loading="lazy">
+                        <svg class="nav__svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M5 22h14c1.103 0 2-.897 2-2V9a1 1 0 0 0-1-1h-3V7c0-2.757-2.243-5-5-5S7 4.243 7 7v1H4a1 1 0 0 0-1 1v11c0 1.103.897 2 2 2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-4 3h2v2h2v-2h6v2h2v-2h2l.002 10H5V10z"></path></svg>
                         <span class="nav__span--bag">12</span>
                     </div>
                 </button>
                 <button class="nav__btn">
-                    <img class="nav__img" src="./assets/images/menu.png" alt="" loading="lazy">
+                    <svg class="nav__svg nav__svg--menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm5 2h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm1-6h4v4h-4V5zM3 20a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6zm2-5h4v4H5v-4zm8 5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6zm2-5h4v4h-4v-4z"></path></svg>
                 </button>
             </div>
         </nav>
@@ -59,8 +64,8 @@
                         <span class="products__span">show all products</span>
                     </button>
                 </li>
-                <li class="products__li">
-                    <button class="products__btn">
+                <li class="products__li products__li--hoodies">
+                    <button class="products__btn ">
                         <h2 class="products__h3">Hoodies</h2>
                         <span class="products__span">3 products</span>
                     </button>
@@ -131,16 +136,16 @@
                         <h3 class="footer__h3">About Us</h3>
                     </th>
                     <li class="footer__li">
-                        <a href="">Support Center</a>
+                        <a class="footer__a" href="">Support Center</a>
                     </li>
                     <li class="footer__li">
-                        <a href="">Customer Support</a>
+                        <a class="footer__a" href="">Customer Support</a>
                     </li>
                     <li class="footer__li">
-                        <a href="">About Us</a>
+                        <a class="footer__a" href="">About Us</a>
                     </li>
                     <li class="footer__li">
-                        <a href="">Copy Right</a>
+                        <a class="footer__a" href="">Copy Right</a>
                     </li>
                 </ul>                    
             </li>
@@ -150,13 +155,13 @@
                         <h3 class="footer__h3">Product</h3>
                     </th>
                     <li class="footer__li">
-                        <a href="">Hoodies</a>
+                        <a class="footer__a" href="">Hoodies</a>
                     </li>
                     <li class="footer__li">
-                        <a href="">Shirts</a>
+                        <a class="footer__a" href="">Shirts</a>
                     </li>
                     <li class="footer__li">
-                        <a href="">Sweatshirts</a>
+                        <a class="footer__a" href="">Sweatshirts</a>
                     </li>
                 </ul>                
             </li>
@@ -166,18 +171,18 @@
                         <h3 class="footer__h3 footer__h3--social">Social</h3>
                     </th>
                     <li class="footer__li">
-                        <a href="https://www.facebook.com/">
-                            <img class="footer__img" src="./assets/images/facebook.png" alt="">
+                        <a class="footer__a" href="https://www.facebook.com/">
+                            <svg class="footer__svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path></svg>
                         </a>
                     </li>
                     <li class="footer__li">
-                        <a href="https://twitter.com/">
-                            <img class="footer__img" src="./assets/images/twitter.png" alt="">
+                        <a class="footer__a" href="https://twitter.com/">
+                            <svg class="footer__svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z"></path></svg>
                         </a>
                     </li>
                     <li class="footer__li">
-                        <a href="https://www.instagram.com/">
-                            <img class="footer__img" src="./assets/images/instagram2.png" alt="">
+                        <a class="footer__a" href="https://www.instagram.com/">
+                            <svg class="footer__svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216 4.61 4.61 0 0 0-2.633-2.633 6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42 4.607 4.607 0 0 0-2.633 2.633 6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419 4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187.043-.962.056-1.267.056-3.71-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078 1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z"></path><circle cx="11.994" cy="11.979" r="3.003"></circle></svg>
                         </a>
                     </li>
                 </ul>
@@ -186,6 +191,6 @@
         <hr class="footer__hr">
         <span class="footer__span">©<span class="footer__span footer__span--sub">academlo</span>. All rigths reserved</span>
     </footer>
-    
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>
