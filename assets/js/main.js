@@ -1,5 +1,12 @@
 //Variables
 const loader = document.getElementById("loader")
+const header = document.getElementById("header")
+const cartView = document.getElementById("cart-view")
+const openCartViewBtn = document.getElementById("open-cart-view")
+const closeCartViewBtn = document.getElementById("close-cart-view")
+const menuView = document.getElementById("menu-view")
+const openMenuViewBtn = document.getElementById("open-menu-view")
+const closeMenuViewBtn = document.getElementById("close-menu-view")
 
 //Functions
 const hideLoader = () => {
@@ -8,8 +15,38 @@ const hideLoader = () => {
   },2500)
 }
 
+const colorHeader = () => {
+  if(window.scrollY>0){
+    header.classList.add("colored-header")
+  }else{
+    header.classList.remove("colored-header")
+  }
+}
+
+const toggleCartView = () => {
+  cartView.classList.toggle("hidden")
+}
+
+const toggleMenuView = () => {
+  menuView.classList.toggle("hidden")
+}
+
+// const openMenuView = () => {
+//   menuView.classList.remove("hidden")
+// }
+
+// const closeMenuView = () => {
+//   menuView.classList.add("hidden")
+// }
+
+
 //Events
-document.addEventListener("DOMContentLoaded",() => {hideLoader()})
+document.addEventListener("DOMContentLoaded",() => hideLoader())
+window.addEventListener("scroll",() => colorHeader())
+openMenuViewBtn.addEventListener("click", () => toggleMenuView())
+closeMenuViewBtn.addEventListener("click", () => toggleMenuView())
+openCartViewBtn.addEventListener("click", () => toggleCartView())
+closeCartViewBtn.addEventListener("click", () => toggleCartView())
 
 
 
