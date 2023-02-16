@@ -9,7 +9,7 @@ const openMenuViewBtn = document.getElementById("open-menu-view")
 const closeMenuViewBtn = document.getElementById("close-menu-view")
 const articlesContainer = document.getElementById("articles-container")
 const cartContainer = document.getElementById("cart-container")
-const products = [
+const db = [
   {
     id: 1,
     name:"Hoodies",
@@ -35,7 +35,8 @@ const products = [
     quantity: 10,
   }
 ]
-let cart = []
+const products = window.localStorage.getItem("productsDB") ? JSON.parse(window.localStorage.getItem("productsDB")):db
+let cart = window.localStorage.getItem("cartDB")? JSON.parse(window.localStorage.getItem("cartDB")) : [];
 const itemsCounter = document.getElementById("items-counter")
 const cartItemsCounter = document.getElementById("cart-items-counter")
 const totalAccount = document.getElementById("total-account")
@@ -43,6 +44,10 @@ const checkoutBtn = document.getElementById("checkout-btn")
 const articleBtns = document.getElementById("article-btns")
 const homeBtn = document.getElementById("home-btn")
 const clearCartBtn = document.getElementById("btn--clear-cart")
+const MenuViewHomeLink = document.getElementById("menu-view__a--home")
+const MenuViewProductsLink = document.getElementById("menu-view__a--products")
+const moonBtn =document.getElementById("moon-btn")
+const sunBtn =document.getElementById("sun-btn")
 
 // Functions
 const hideLoader = () => {
@@ -67,6 +72,12 @@ const toggleMenuView = () => {
   menuView.classList.toggle("hidden")
 }
 
+const toggleTheme = () => {
+  document.body.classList.toggle("dark")
+  moonBtn.classList.toggle("dark")
+  sunBtn.classList.toggle("dark")
+}
+
 const printProducts = () => {
   let html = ""
   products.forEach(product => {
@@ -85,6 +96,7 @@ const printProducts = () => {
     `
   });
   articlesContainer.innerHTML = html
+  window.localStorage.setItem("productsDB", JSON.stringify(products))
 }
 
 printProducts()
@@ -125,6 +137,7 @@ function printCart(){
   cartItemsCounter.innerHTML = `${totalArticles()} items`
   totalAccount.innerHTML = `$${totalAmount()}`
   checkoutButtons () 
+  window.localStorage.setItem("cartDB",JSON.stringify(cart))
 }
 
 printCart()
@@ -212,6 +225,12 @@ function checkoutButtons (){
   }
 }
 
+function darkTheme (){
+  body.classList.add("dark")
+  moonBtn.classList.add("dark")
+  sunBtn.classList.add("dark")
+}
+
 //Events
 document.addEventListener("DOMContentLoaded",() => hideLoader())
 window.addEventListener("scroll",() => colorHeader())
@@ -249,3 +268,8 @@ clearCartBtn.addEventListener("click", function(e){
   }
   clearCart()
 })
+
+MenuViewHomeLink.addEventListener("click",()=>toggleMenuView())
+MenuViewProductsLink.addEventListener("click",()=>toggleMenuView())
+moonBtn.addEventListener("click", () => toggleTheme())
+sunBtn.addEventListener("click", () => toggleTheme())
