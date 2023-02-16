@@ -7,12 +7,48 @@ const closeCartViewBtn = document.getElementById("close-cart-view")
 const menuView = document.getElementById("menu-view")
 const openMenuViewBtn = document.getElementById("open-menu-view")
 const closeMenuViewBtn = document.getElementById("close-menu-view")
+const articlesContainer = document.getElementById("articles-container")
+const cartContainer = document.getElementById("cart-container")
+const products = [
+  {
+    id: 1,
+    name:"Hoodies",
+    price:"14.00",
+    image:"assets/images/featured1.png",
+    category:"hoodies",
+    quantity: 5,
+  },
+  {
+    id: 2,
+    name:"Shirts",
+    price:"24.00",
+    image:"assets/images/featured2.png",
+    category:"shirts",
+    quantity: 7,
+  },
+  {
+    id: 3,
+    name:"Swetshirts",
+    price:"24.00",
+    image:"assets/images/featured3.png",
+    category:"swetshirts",
+    quantity: 10,
+  }
+]
+let cart = []
+const itemsCounter = document.getElementById("items-counter")
+const cartItemsCounter = document.getElementById("cart-items-counter")
+const totalAccount = document.getElementById("total-account")
+const checkoutBtn = document.getElementById("checkout-btn")
+const articleBtns = document.getElementById("article-btns")
+const homeBtn = document.getElementById("home-btn")
+const clearCartBtn = document.getElementById("btn--clear-cart")
 
-//Functions
+// Functions
 const hideLoader = () => {
   setTimeout(()=>{
     loader.classList.add("hidden")
-  },2500)
+  },1500)
 }
 
 const colorHeader = () => {
@@ -31,14 +67,150 @@ const toggleMenuView = () => {
   menuView.classList.toggle("hidden")
 }
 
-// const openMenuView = () => {
-//   menuView.classList.remove("hidden")
-// }
+const printProducts = () => {
+  let html = ""
+  products.forEach(product => {
+    html +=`
+    <article class="products__article article">
+      <div class="article__div article__div--img">
+        <img class="article__img" src="${product.image}" alt="${product.name}">
+      </div>
+      <div class="article__div article__div--data">
+        <span class="article__span">$${product.price}</span>
+        <span class="article__span">| Stock: ${product.quantity}</span>
+        <h3 class="article__h3">${product.name}</h3>
+        <button class="article__button" data-id="${product.id}">+</button>
+      </div>
+    </article>    
+    `
+  });
+  articlesContainer.innerHTML = html
+}
 
-// const closeMenuView = () => {
-//   menuView.classList.add("hidden")
-// }
+printProducts()
 
+
+function printCart(){
+  let html = ""
+  for(const article of cart){
+    const product = products.find(p => p.id === article.id)
+    html += 
+    `
+    <article class="cart-view__article">
+      <img class="cart-view__img" src="${product.image}" alt="${product.name}">
+      <div class="cart-view__div--data">
+          <h3 class="cart-view__h3">${product.name}</h3>
+          <span class="cart-view__span cart-view__span--stock">
+              Stock: ${product.quantity-article.qty} | $${product.price}
+          </span>
+          <span class="cart-view__span cart-view__span--subtotal">
+              Subtotal: $${product.price*article.qty}
+          </span>
+          <div class="cart-view__div cart-view__div--quantity">
+              <div class="cart-view__div cart-view__div--btns" id="article-btns">
+                  <button class="cart-view__btn--minus" data-id="${product.id}">-</button>
+                  <span class="cart-view__span cart-view__span--units">${article.qty}</span>
+                  <button class="cart-view__btn--plus" data-id="${product.id}">+</button>
+              </div>
+              <button class="cart-view__btn--clear">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24";><path d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z"></path></svg>
+              </button>
+          </div>
+      </div>
+    </article>
+    `
+  }
+  cartContainer.innerHTML = html
+  itemsCounter.innerHTML = totalArticles()
+  cartItemsCounter.innerHTML = `${totalArticles()} items`
+  totalAccount.innerHTML = `$${totalAmount()}`
+  checkoutButtons () 
+}
+
+printCart()
+
+
+
+function addToCart(id, qty =1){
+  const product = products.find (p => p.id === id)
+  if(product && product.quantity > 0){
+    const article = cart.find(a => a.id === id)
+    if(article){
+      if(checkStock(id,qty+article.qty)){
+        article.qty++
+      }else{
+        window.alert("No hay stock")
+      }
+    } else {
+      cart.push({id,qty})
+    }
+  } else {
+    window.alert("producto agotado")
+  }
+  printCart()
+}
+
+function checkStock(id, qty){
+  const product = products.find(p => p.id === id)
+  return product.quantity - qty >= 0 
+}
+
+function removeFromCart (id, qty = 1){
+  const article = cart.find(a => a.id === id)
+  if(article && article.qty - qty > 0){
+    article.qty--
+  } else {
+    const confirm = window.confirm("¿Estás seguro?")
+    if(confirm){
+      cart = cart.filter(a => a.id !== id)
+    }
+  }
+  printCart()
+}
+
+function deleteFromCart(id){
+  const article = cart.find(a => a.id === id)
+  window.alert("¿Estás seguro?")
+  cart.splice(cart.indexOf(article),1)
+  printCart()
+}
+
+function totalArticles(){
+  return cart.reduce((acc,article) => acc + article.qty, 0)
+}
+
+function totalAmount(){
+  return cart.reduce((acc, article) => {
+    const product = products.find(p => p.id === article.id)
+    return acc + product.price*article.qty
+  },0)
+}
+
+function clearCart(){
+  cart = []
+  printCart()
+}
+
+function checkout () {
+  cart.forEach(article =>{
+    const product = products. find(p => p.id === article.id)
+    product.quantity -= article.qty
+  })
+  clearCart ()
+  printProducts ()
+  window.alert("Gracias por su compra")
+  printCart()
+}
+
+function checkoutButtons (){
+  if(cart.length>0){
+    checkoutBtn.removeAttribute("disabled")
+    clearCartBtn.removeAttribute("disabled")
+  } else {
+    checkoutBtn.setAttribute("disabled","disabled")
+    clearCartBtn.setAttribute("disabled","disabled")
+  }
+}
 
 //Events
 document.addEventListener("DOMContentLoaded",() => hideLoader())
@@ -47,122 +219,33 @@ openMenuViewBtn.addEventListener("click", () => toggleMenuView())
 closeMenuViewBtn.addEventListener("click", () => toggleMenuView())
 openCartViewBtn.addEventListener("click", () => toggleCartView())
 closeCartViewBtn.addEventListener("click", () => toggleCartView())
-
-
-
-
-
-// {/* <const products = [
-//   {
-//     id: 1,
-//     name:"Camisa",
-//     price:456,
-//     image:"assets/images/featured1.png",
-//     category:"hoodies",
-//     quantity: 5,
-//   },
-//   {
-//     id: 2,
-//     name:"Playera",
-//     price:456,
-//     image:"assets/images/featured1.png",
-//     category:"shirts",
-//     quantity: 7,
-//   },
-//   {
-//     id: 3,
-//     name:"Sudadera",
-//     price:456,
-//     image:"assets/images/featured1.png",
-//     category:"swetshirts",
-//     quantity: 4,
-//   }
-// ]
-
-// function printProducts(){
-//   let html = ""
-//   for (const product of products ){
-//     html+=`
-
-//     `
-//   }
-// }
-
-// printProducts()
-
-// let cart =[]
-
-// function printCart(){
-//   for (const article of cart){
-//     console.log(article)
-//   }
-// }
-
-// printCart()
-
-// function addToCart (id,qty = 1){
-//   const product = product.find(p => p.id === id)
-//   if(product && product.quantity){
-//       const article = cart.find(a => a.id === id)
-//   if(article){
-//     if(chechkStock(id,qty)){
-//       article.qty++
-//     }else{
-//       console.log("No hay stock suficiente")
-//     }
-//   } else{
-//     cart.push({id,qty})
-//   }
-
-//   cart.push({id})
-//   }
-
-// }
-
-// function checkStock(id,qty){
-//   const product = products.find(p=>p.id == id)
-//   return product.quantity - qty >= 0
-// }
-
-// function removeFromCart(id,qty = 1){
-//   const article = cart.find(a => a.id === id)
-//   if (article && article.qty-qty>0){
-//     article.qty--  
-//   }else{
-//     const confirm = window.confirm("¿estás seguro?"){
-//       if (confirm){
-//           cart = cart.filter(a=>a.id !== id)
-//       }
-//     }
-//   }
-// }
-
-// function deleteFromCart(id){
-//   const article = cart.find(a=>a.id === id)
-//   cart.splice(cart.indexOf(article),1)
-// }
-
-// function totalArticles(){
-//   return cart.reduce((acc,article) => acc + article.qty,0)
-// }
-
-// function totalAmount (){
-//   return cart.reduce((acc, article) => {
-//     const product = product.find(p => p.id === article.id)
-//     return acc + product.price * article.qty
-//   }, 0)
-// }
-
-// function clearCart(){
-//   cart = []
-// }
-
-// function checkout(){
-//   cart.forEach(article =>{
-//     const product =products.find(p=>p.id === article.id)
-//     product.quantity -= article.qty
-//   })
-//   clearCart()
-//   printProducts()
-//   console.log("Gracias por su compra")
-// }> */}
+checkoutBtn.addEventListener("click", () => checkout())
+articlesContainer.addEventListener("click", function(e){
+  const add = e.target
+  if(add.tagName === "BUTTON"){
+    const id = +add.dataset.id
+    addToCart(id)
+  }
+})
+cartContainer.addEventListener("click",function(e){
+  const btn = e.target
+  const id = +btn.dataset.id
+  if(btn.classList.contains("cart-view__btn--minus")){
+    removeFromCart(id)
+  }
+  if(btn.classList.contains("cart-view__btn--plus")){
+    addToCart(id)
+  }
+  if(btn.closest(".cart-view__btn--clear")){
+    deleteFromCart(id)
+  }
+})
+homeBtn.addEventListener("click",() => addToCart(2))
+clearCartBtn.addEventListener("click", function(e){
+  window.alert("¿Estás seguro?")
+  const clearBtn = e.target.closest(".cart-view__btn--clear-cart")
+  if(clearBtn){
+    clearCart()
+  }
+  clearCart()
+})
